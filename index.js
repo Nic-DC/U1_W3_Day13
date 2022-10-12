@@ -12,7 +12,7 @@ buttonRemoveFirstTask.innerText = "Remove First Task";
 parentDiv.insertBefore(buttonRemoveLastTask, inputBtn);
 parentDiv.insertBefore(buttonRemoveFirstTask, ul);
 
-//buttonRemoveLastTask.addEventListener("click", removeLast);
+// buttonRemoveLastTask.addEventListener("click", removeLast);
 
 // EXERCISE 4
 //         Create a button "Remove First Task" to trigger the function
@@ -72,6 +72,7 @@ const getTasksAsArray = function () {
     tasksArray.push(task.innerText);
   }
   console.log({ tasksArray });
+  return tasksArray;
 };
 
 // EXERCISE 9:
@@ -79,4 +80,75 @@ const getTasksAsArray = function () {
 // "Change task background" button via JavaScript(not via html attribute)
 // Take the color from the color picker ad apply it as background to every
 // list item
-const changeTaskBackgroundColor = function () {};
+const btnChangeTaskBackground = document.querySelector(
+  "input[value='Change task background']"
+);
+const colorInput = document.getElementById("colorPicker");
+const lis = document.querySelectorAll("#myTaskList li");
+
+const changeTaskBackgroundColor = function (event) {
+  for (let li of lis) {
+    li.style.backgroundColor = colorInput.value;
+  }
+};
+btnChangeTaskBackground.addEventListener("click", changeTaskBackgroundColor);
+
+// window.onload = function () {
+//   const button = document.querySelector("button");
+//   const subtitle = document.querySelector("header h2");
+//   const input = document.getElementById("inputColor");
+//   const changeSubtitle2 = (event) => {
+//     subtitle.style.color = input.value;
+//   };
+//   button.addEventListener("click", changeSubtitle2);
+// };
+
+// EXERCISE 10:
+// Attach an eventListener to each new task you create. When the task
+// receives the click it should be removed(only the clicked task
+// should disappear)
+const allListItems = [];
+
+const putItemsInArray = function () {
+  for (let li of lis) {
+    allListItems.push(li.innerText);
+  }
+  console.log({ allListItems });
+  return allListItems;
+};
+
+const inputTask = document.getElementById("newTask");
+
+const hideTask = function (event) {
+  event.currentTarget.hidden = true;
+};
+
+const addNewTask = function () {
+  const li = document.createElement("li");
+  li.innerText = inputTask.value;
+  ul.appendChild(li);
+  allListItems.push(li);
+  li.addEventListener("click", hideTask);
+};
+
+// EXERCISE 11:
+// Create a function "bubbleSort()" which sorts the task list
+// alphabetically using the bubble sort algorithm
+const bubbleSort = () => {
+  for (let i = 0; i < putItemsInArray().length; i++) {
+    // Last i elements are already in place
+    for (let j = 0; j < putItemsInArray().length - i - 1; j++) {
+      // Checking if the item at present iteration
+      // is greater than the next iteration
+      if (putItemsInArray()[j] > putItemsInArray()[j + 1]) {
+        // If the condition is true then swap them
+        let temp = putItemsInArray()[j];
+        putItemsInArray()[j] = putItemsInArray()[j + 1];
+        putItemsInArray()[j + 1] = temp;
+      }
+    }
+  }
+  // Print the sorted array
+  console.log(allListItems);
+};
+// bubbleSort();
