@@ -127,7 +127,7 @@ const addNewTask = function () {
   const li = document.createElement("li");
   li.innerText = inputTask.value;
   ul.appendChild(li);
-  allListItems.push(li);
+  allListItems.push(li.innerText);
   li.addEventListener("click", hideTask);
 };
 
@@ -135,20 +135,21 @@ const addNewTask = function () {
 // Create a function "bubbleSort()" which sorts the task list
 // alphabetically using the bubble sort algorithm
 const bubbleSort = () => {
-  for (let i = 0; i < putItemsInArray().length; i++) {
+  let array = putItemsInArray();
+  for (let i = 0; i < array.length; i++) {
     // Last i elements are already in place
-    for (let j = 0; j < putItemsInArray().length - i - 1; j++) {
+    for (let j = 0; j < array.length - i - 1; j++) {
       // Checking if the item at present iteration
       // is greater than the next iteration
-      if (putItemsInArray()[j] > putItemsInArray()[j + 1]) {
+      if (array[j][0] > array[j + 1][0]) {
         // If the condition is true then swap them
-        let temp = putItemsInArray()[j];
-        putItemsInArray()[j] = putItemsInArray()[j + 1];
-        putItemsInArray()[j + 1] = temp;
+        let temp = array[j][0];
+        array[j][0] = array[j + 1][0];
+        array[j + 1][0] = temp;
       }
     }
   }
   // Print the sorted array
-  console.log(allListItems);
+  console.log(array);
 };
-// bubbleSort();
+bubbleSort();
